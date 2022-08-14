@@ -2,8 +2,8 @@
 import { useTheme } from 'next-themes';
 import { createContext, useMemo, useState } from 'react';
 
-import { websitePageContextProps } from '../../../../../types/context.d';
 import themeDark from '../../../../theme/themeDark';
+import { websitePageContextProps } from '../../../../types/context.d';
 
 export const WebsitePageContext = createContext<websitePageContextProps | null>(
   null,

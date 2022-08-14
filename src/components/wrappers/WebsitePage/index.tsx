@@ -4,9 +4,9 @@ import Container from '@mui/material/Container';
 import { styled, useTheme } from '@mui/material/styles';
 import { useContext, useEffect, useState } from 'react';
 
-// import { WebsitePageWrapperProps } from './index.d';
-import { WebsitePageWrapperProps } from '../../../../types/indexWrapper.d';
 import { ThemeProps } from '../../../theme/themeLight';
+// import { WebsitePageWrapperProps } from './index.d';
+import { WebsitePageWrapperProps } from '../../../types/indexWrapper.d';
 import AxAppBar from '../../foundation/AxAppBar/AxAppBar';
 import AxDrawer from '../../foundation/AxDrawer/AxDrawer';
 import AxFooter from '../../foundation/AxFooter/AxFooter';
