@@ -12,7 +12,7 @@ module.exports = {
   images: {
     domains: imageDomains,
   },
-  env: {
-    // NODE_ENV: 'development',
-  },
+  // env: {
+  // NODE_ENV: 'development',
+  // },
 };

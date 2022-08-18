@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -14,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
+import { signIn, signOut } from 'next-auth/react';
 import { useTheme as useThemeNT } from 'next-themes';
 import { useContext } from 'react';
 
@@ -110,49 +110,48 @@ const AxAppBar = ({
             </Typography>
           </Stack>
 
-          <Box
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
             sx={{
-              display: { xs: 'none', md: 'block' },
+              display: { xs: 'none', md: 'inherit' },
               pointerEvents: { xs: 'none', md: 'auto' },
             }}
           >
             <ThemeSwitch toggleTheme={toggleTheme} />
-            {websitePageContext?.isAtuh ? (
+            {websitePageContext?.sessionData ? (
               <>
                 <Link href="/app/profile">
                   <Tooltip title="Perfil" arrow placement="bottom">
-                    <IconButton color="inherit">
-                      <AssignmentIndIcon />
-                    </IconButton>
+                    <Avatar
+                      alt={websitePageContext?.sessionData.user.name}
+                      src={websitePageContext?.sessionData.user.image}
+                      variant="rounded"
+                      sx={{ width: 30, height: 30 }}
+                    />
                   </Tooltip>
                 </Link>
-                {/* <Link href="/"> */}
                 <Tooltip title="Sair" arrow placement="bottom">
-                  <IconButton
-                    color="error"
-                    onClick={() => websitePageContext?.setIsAuth(false)}
-                  >
+                  <IconButton color="error" onClick={() => signOut()}>
                     <LogoutIcon />
                   </IconButton>
                 </Tooltip>
-                {/* </Link> */}
               </>
             ) : (
-              // <Link href="/api/auth/login">
               <Tooltip title="Login" arrow placement="bottom">
                 <Button
                   variant="contained"
                   disableElevation
                   size="small"
                   endIcon={<LoginIcon />}
-                  onClick={() => websitePageContext?.setIsAuth(true)}
+                  onClick={() => signIn()}
                 >
                   Login
                 </Button>
               </Tooltip>
-              // </Link>
             )}
-          </Box>
+          </Stack>
 
           {hasDrawer && <AppBarRightSmallScreen toggleTheme={toggleTheme} />}
         </Stack>

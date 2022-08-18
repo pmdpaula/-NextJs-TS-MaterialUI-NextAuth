@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react/destructuring-assignment */
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
 import WebsitePageWrapper from '..';
@@ -8,21 +10,24 @@ import WebsiteGlobalProvider from '../provider';
 
 export default function websitePageHOC(
   PageComponent: any,
-  { pageWrapperProps } = { pageWrapperProps: {} },
+  pageWrapperProps: Record<string, unknown>,
+  session?: Session,
 ) {
   return (props: any) => (
-    <WrapperProvider>
-      <ThemeProvider defaultTheme="system">
-        <WebsiteGlobalProvider>
-          <WebsitePageWrapper
-            {...pageWrapperProps}
-            {...props.pageWrapperProps}
-            messages={props.messages}
-          >
-            <PageComponent {...props} />
-          </WebsitePageWrapper>
-        </WebsiteGlobalProvider>
-      </ThemeProvider>
-    </WrapperProvider>
+    <SessionProvider session={session}>
+      <WrapperProvider>
+        <ThemeProvider defaultTheme="system">
+          <WebsiteGlobalProvider>
+            <WebsitePageWrapper
+              {...props}
+              {...pageWrapperProps}
+              messages={props.messages}
+            >
+              <PageComponent {...pageWrapperProps} />
+            </WebsitePageWrapper>
+          </WebsiteGlobalProvider>
+        </ThemeProvider>
+      </WrapperProvider>
+    </SessionProvider>
   );
 }

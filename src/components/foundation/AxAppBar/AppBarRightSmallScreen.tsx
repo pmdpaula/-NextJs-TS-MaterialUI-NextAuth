@@ -1,10 +1,14 @@
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { Typography } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
+import { signIn, signOut } from 'next-auth/react';
 import { useContext, useState } from 'react';
 
 import ThemeSwitch from '../../commons/ThemeSwitch/ThemeSwitch';
@@ -33,7 +37,11 @@ const AppBarRightSmallScreen = ({
   }
 
   function handleClickMenu() {
-    websitePageContext?.setIsAuth(!websitePageContext.isAtuh);
+    if (websitePageContext?.sessionStatus === 'authenticated') {
+      signOut();
+    } else {
+      signIn();
+    }
     setAnchorEl(null);
   }
 
@@ -64,36 +72,76 @@ const AppBarRightSmallScreen = ({
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <ThemeSwitch toggleTheme={toggleTheme} />
-          Tema
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            // spacing={5}
+            sx={{ width: '100%' }}
+          >
+            <ThemeSwitch toggleTheme={toggleTheme} />
+            <Typography>Tema</Typography>
+          </Stack>
         </MenuItem>
-        {websitePageContext?.isAtuh ? (
+        {websitePageContext?.sessionStatus === 'authenticated' ? (
           <div>
-            <MenuItem onClick={handleClose}>
-              <Link href="/profile">
-                <IconButton color="inherit">
+            <MenuItem onClick={handleClose} sx={{ width: '100%' }}>
+              <Link href="/app/profile" sx={{ width: '100%', align: 'left' }}>
+                {/* <IconButton color="inherit">
                   <AssignmentIndIcon />
-                </IconButton>
-                Perfil
+                </IconButton> */}
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  // spacing={5}
+                  sx={{ width: '100%' }}
+                >
+                  <Avatar
+                    alt={websitePageContext?.sessionData.user.name}
+                    src={websitePageContext?.sessionData.user.image}
+                    variant="rounded"
+                    sx={{ width: 32, height: 32 }}
+                  />
+                  <Typography>Perfil</Typography>
+                </Stack>
               </Link>
             </MenuItem>
             <MenuItem onClick={handleClickMenu}>
-              {/* <Link href="/logout"> */}
-              <IconButton color="error">
-                <LogoutIcon />
-              </IconButton>
-              Sair
-              {/* </Link> */}
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                sx={{ width: '100%' }}
+              >
+                <IconButton
+                  size="large"
+                  color="error"
+                  sx={{ padding: '4px 0 4px 0' }}
+                >
+                  <LogoutIcon />
+                </IconButton>
+                <Typography>Sair</Typography>
+              </Stack>
             </MenuItem>
           </div>
         ) : (
           <MenuItem onClick={handleClickMenu}>
-            {/* <Link href="/login"> */}
-            <IconButton color="inherit">
-              <AssignmentIndIcon />
-            </IconButton>
-            Login
-            {/* </Link> */}
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ width: '100%' }}
+            >
+              <IconButton
+                size="large"
+                color="primary"
+                sx={{ padding: '4px 0 4px 0' }}
+              >
+                <AssignmentIndIcon />
+              </IconButton>
+              <Typography>Login</Typography>
+            </Stack>
           </MenuItem>
         )}
       </Menu>
