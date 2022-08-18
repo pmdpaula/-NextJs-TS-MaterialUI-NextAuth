@@ -20,6 +20,7 @@ interface LinkProps {
   color?: 'initial' | 'inherit' | 'primary' | 'secondary' | 'textPrimary' | 'textSecondary' | 'error';
   children: ReactNode;
   onClick?: any;
+  sx?: any;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

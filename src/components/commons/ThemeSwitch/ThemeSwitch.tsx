@@ -11,6 +11,12 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: switchBaseWidth,
   height: switchBaseHeight,
   padding: 7,
+  // marginX: 0,
+  margin: 1,
+  left: -8,
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
   '& .MuiSwitch-switchBase': {
     marginTop: 2,
     padding: 0,
@@ -53,7 +59,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
     borderRadius: switchBaseHeight / 2,
   },
-  margin: 2,
+  // margin: 2,
 }));
 
 interface ThemeSwitchProps {
@@ -76,7 +82,7 @@ const ThemeSwitch = ({ toggleTheme }: ThemeSwitchProps) => {
       placement="bottom"
     >
       <MaterialUISwitch
-        sx={{ m: 1 }}
+        // sx={{ m: 1 }}
         checked={resolvedTheme === 'dark'}
         onChange={toggleTheme}
       />

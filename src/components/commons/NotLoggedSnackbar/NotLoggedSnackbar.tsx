@@ -8,7 +8,10 @@ import Slide, { SlideProps } from '@mui/material/Slide';
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import { TransitionProps } from '@mui/material/transitions';
 import router from 'next/router';
-import { useEffect, useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useContext, useEffect, useState } from 'react';
+
+import { WebsitePageContext } from '../../wrappers/WebsitePage/context';
 
 export interface State extends SnackbarOrigin {
   open: boolean;
@@ -19,7 +22,9 @@ const SlideTransitionUp = (props: SlideProps) => (
 );
 
 const NotLoggedSnackbar = () => {
-  const [stateloginSnackbar, setStateloginSnackbar] = useState<{
+  const websitePageContext = useContext(WebsitePageContext);
+
+  const [stateLoginSnackbar, setStateLoginSnackbar] = useState<{
     open: boolean;
     Transition: React.ComponentType<
       TransitionProps & {
@@ -29,13 +34,21 @@ const NotLoggedSnackbar = () => {
     vertical: 'top' | 'bottom';
     horizontal: 'center' | 'left' | 'right';
   }>({
-    open: false,
+    open: !websitePageContext?.sessionData,
     Transition: Fade,
     vertical: 'bottom',
     horizontal: 'center',
   });
 
   const [progress, setProgress] = useState(0);
+
+  const goToLogin = () => {
+    signIn();
+    setStateLoginSnackbar({
+      ...stateLoginSnackbar,
+      open: false,
+    });
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -47,39 +60,46 @@ const NotLoggedSnackbar = () => {
       });
     }, 250);
 
-    setTimeout(() => {
-      router.push('/');
-    }, 4500);
+    if (websitePageContext?.sessionStatus === 'unauthenticated') {
+      setTimeout(() => {
+        router.push('/');
+      }, 5000);
+    }
 
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [websitePageContext?.sessionStatus]);
 
   return (
     <Snackbar
       // anchorOrigin={{ vertical, horizontal }}
-      open={stateloginSnackbar.open}
+      open={stateLoginSnackbar.open}
       // eslint-disable-next-line prettier/prettier
-      onClose={() => setStateloginSnackbar({ ...stateloginSnackbar, open: false })}
+      onClose={() => setStateLoginSnackbar({ ...stateLoginSnackbar, open: false })}
       message="Você não está logado!"
       TransitionComponent={SlideTransitionUp}
       anchorOrigin={{
-        vertical: stateloginSnackbar.vertical,
-        horizontal: stateloginSnackbar.horizontal,
+        vertical: stateLoginSnackbar.vertical,
+        horizontal: stateLoginSnackbar.horizontal,
       }}
-      key={stateloginSnackbar.vertical + stateloginSnackbar.horizontal}
+      key={stateLoginSnackbar.vertical + stateLoginSnackbar.horizontal}
     >
       <Alert
         severity="error"
         variant="filled"
         elevation={6}
         // eslint-disable-next-line prettier/prettier
-      // onClose={() => setStateloginSnackbar({ ...stateloginSnackbar, open: false })}
+      // onClose={() => setStateLoginSnackbar({ ...stateLoginSnackbar, open: false })}
         // eslint-disable-next-line prettier/prettier
         action={(
           <>
-            <Button color="success" variant="outlined" size="small" href="/">
+            <Button
+              color="success"
+              variant="outlined"
+              size="small"
+              onClick={goToLogin}
+            >
               CONECTAR
             </Button>
             <IconButton
@@ -87,7 +107,7 @@ const NotLoggedSnackbar = () => {
               aria-label="close"
               color="inherit"
               // eslint-disable-next-line prettier/prettier
-              onClick={() => setStateloginSnackbar({ ...stateloginSnackbar, open: false })}
+              onClick={() => setStateLoginSnackbar({ ...stateLoginSnackbar, open: false })}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
