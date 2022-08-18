@@ -27,6 +27,7 @@
     "color": "^4.1.0",
     "lodash": "^4.17.21",
     "next": "latest",
+    "next-auth": "^4.10.3",
     "next-themes": "^0.2.0",
     "react": "latest",
     "react-dom": "latest",
