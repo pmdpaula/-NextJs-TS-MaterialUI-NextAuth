@@ -8,7 +8,7 @@ interface SEOProps {
 const SEO = ({ headTitle }: SEOProps) => {
   const hasheadTitle = Boolean(headTitle);
 
-  const baseTitle = 'AxeBlade Software - SISCOINTI';
+  const baseTitle = 'AxeBlade Software';
   const title = hasheadTitle ? `${headTitle} | ${baseTitle}` : baseTitle;
 
   // eslint-disable-next-line prettier/prettier

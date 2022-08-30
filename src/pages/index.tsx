@@ -35,7 +35,7 @@ const Home: NextPage = () => {
         </Typography>
         <Typography align="center" component="p" variant="h6" gutterBottom>
           Modelo base de uma WebApplication com Nextjs 12, Material UI v5 e
-          autenticação com Auth0
+          autenticação com Next-Auth
         </Typography>
       </Box>
     </Container>
@@ -43,12 +43,10 @@ const Home: NextPage = () => {
 };
 
 export default websitePageHOC(Home, {
-  pageWrapperProps: {
-    seoProps: {
-      headTitle: 'Home',
-    },
-    hasDrawer: true,
-    hasAppBar: true,
-    hasFooter: true,
+  seoProps: {
+    headTitle: 'Home',
   },
+  hasDrawer: true,
+  hasAppBar: true,
+  hasFooter: true,
 });

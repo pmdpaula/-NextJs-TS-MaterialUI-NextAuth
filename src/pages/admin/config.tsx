@@ -3,20 +3,18 @@ import Typography from '@mui/material/Typography';
 import PageSquare from '../../components/commons/PageSquare/PageSquare';
 import websitePageHOC from '../../components/wrappers/WebsitePage/hoc/index';
 
-const pageName = 'Clonagem PostgresSQL';
+const pageName = 'Configurações';
 
-const PageClonePJe = () => (
+const PageTables = () => (
   <PageSquare>
     <Typography>{pageName}</Typography>
   </PageSquare>
 );
 
-export default websitePageHOC(PageClonePJe, {
-  pageWrapperProps: {
-    seoProps: {
-      headTitle: pageName,
-    },
-    hasDrawer: true,
-    hasAppBar: true,
+export default websitePageHOC(PageTables, {
+  seoProps: {
+    headTitle: pageName,
   },
+  hasDrawer: true,
+  hasAppBar: true,
 });

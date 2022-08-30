@@ -1,6 +1,7 @@
 import { Breakpoint, Theme, useTheme } from '@mui/material';
 // import { Breakpoint } from '@mui/material/styles/createBreakpoints';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSession } from 'next-auth/react';
 
 type BreakpointOrNull = Breakpoint | null;
 
@@ -24,4 +25,11 @@ export function useWidth(): Breakpoint {
 export function useIsMidOrHigerSizeScreen(): boolean {
   const theme: Theme = useTheme();
   return useMediaQuery(theme.breakpoints.up('md'));
+}
+
+export function useIsAuthenticated() {
+  const { status: sessionStatus } = useSession();
+  const isAuthenticated = sessionStatus === 'authenticated';
+
+  return isAuthenticated;
 }

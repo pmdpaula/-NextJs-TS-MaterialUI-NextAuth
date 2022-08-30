@@ -5,7 +5,6 @@ import { styled, useTheme } from '@mui/material/styles';
 import { useContext, useEffect, useState } from 'react';
 
 import { ThemeProps } from '../../../theme/themeLight';
-// import { WebsitePageWrapperProps } from './index.d';
 import { WebsitePageWrapperProps } from '../../../types/indexWrapper.d';
 import AxAppBar from '../../foundation/AxAppBar/AxAppBar';
 import AxDrawer from '../../foundation/AxDrawer/AxDrawer';
@@ -36,9 +35,9 @@ const WebsitePageWrapper = ({
 }: WebsitePageWrapperProps): JSX.Element => {
   const theme = useTheme<ThemeProps>(); // useTheme from MUI
   const websitePageContext = useContext(WebsitePageContext);
+  const isAuthenticated = websitePageContext?.sessionStatus === 'authenticated';
 
   const isDrawerCloseble = !useMediaQuery(theme.breakpoints.up('md'));
-  // eslint-disable-next-line prettier/prettier
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(!isDrawerCloseble);
   const [mounted, setMounted] = useState(false);
@@ -77,7 +76,6 @@ const WebsitePageWrapper = ({
   return (
     <>
       <SEO {...seoProps} />
-      {/* TODO: verificar Login children */}
       {seoProps?.headTitle !== 'Login' ? (
         <DrawerAnchor key="drawerAnchor">
           <div>
@@ -91,7 +89,7 @@ const WebsitePageWrapper = ({
             )}
           </div>
 
-          {hasDrawer && (
+          {hasDrawer && isAuthenticated && (
             <AxDrawer
               open={openDrawer}
               toggleOpenDrawer={toggleOpenDrawer}

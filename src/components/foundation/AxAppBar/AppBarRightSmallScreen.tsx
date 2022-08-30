@@ -86,7 +86,7 @@ const AppBarRightSmallScreen = ({
         {websitePageContext?.sessionStatus === 'authenticated' ? (
           <div>
             <MenuItem onClick={handleClose} sx={{ width: '100%' }}>
-              <Link href="/app/profile" sx={{ width: '100%', align: 'left' }}>
+              <Link href="/user/profile" sx={{ width: '100%', align: 'left' }}>
                 {/* <IconButton color="inherit">
                   <AssignmentIndIcon />
                 </IconButton> */}
