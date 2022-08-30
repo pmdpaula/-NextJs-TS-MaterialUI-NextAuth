@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-// import CssBaseline from '@mui/material/CssBaseline';
-// import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { useTheme } from 'next-themes';
 import { ReactNode, useEffect, useState } from 'react';
 
-// import { ThemeProvider } from 'styled-components';
 import themeDark from '../../../../theme/themeDark';
 import themeLight from '../../../../theme/themeLight';
 

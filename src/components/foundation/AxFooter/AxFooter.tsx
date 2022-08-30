@@ -17,6 +17,7 @@ const AxFooterBox = styled(Paper)`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 `;
 
 // interface AxFooterProps {

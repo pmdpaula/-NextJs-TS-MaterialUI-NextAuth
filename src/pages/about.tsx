@@ -3,20 +3,18 @@ import Typography from '@mui/material/Typography';
 import PageSquare from '../components/commons/PageSquare/PageSquare';
 import websitePageHOC from '../components/wrappers/WebsitePage/hoc/index';
 
-const pageName = 'Tabelas';
+const pageName = 'Sobre';
 
 const PageTables = () => (
   <PageSquare>
-    <Typography>{pageName}</Typography>
+    <Typography variant="h1">{pageName}</Typography>
   </PageSquare>
 );
 
 export default websitePageHOC(PageTables, {
-  pageWrapperProps: {
-    seoProps: {
-      headTitle: pageName,
-    },
-    hasDrawer: true,
-    hasAppBar: true,
+  seoProps: {
+    headTitle: pageName,
   },
+  hasDrawer: true,
+  hasAppBar: true,
 });

@@ -25,11 +25,9 @@ const Page404 = (): JSX.Element => (
 );
 
 export default websitePageHOC(Page404, {
-  pageWrapperProps: {
-    seoProps: {
-      headTitle: '404',
-    },
-    hasDrawer: true,
-    hasAppBar: true,
+  seoProps: {
+    headTitle: '404',
   },
+  hasDrawer: true,
+  hasAppBar: true,
 });

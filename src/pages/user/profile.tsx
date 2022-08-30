@@ -72,12 +72,10 @@ const PageProfile = () => {
 };
 
 export default websitePageHOC(PageProfile, {
-  pageWrapperProps: {
-    seoProps: {
-      headTitle: pageName,
-    },
-    footerProps: {
-      content: 'Copyright AxeBlade Software',
-    },
+  seoProps: {
+    headTitle: pageName,
   },
+  // footerProps: {
+  //   content: 'Copyright AxeBlade Software',
+  // },
 });

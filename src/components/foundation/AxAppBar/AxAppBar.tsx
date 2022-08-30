@@ -122,7 +122,7 @@ const AxAppBar = ({
             <ThemeSwitch toggleTheme={toggleTheme} />
             {websitePageContext?.sessionData ? (
               <>
-                <Link href="/app/profile">
+                <Link href="/user/profile">
                   <Tooltip title="Perfil" arrow placement="bottom">
                     <Avatar
                       alt={websitePageContext?.sessionData.user.name}

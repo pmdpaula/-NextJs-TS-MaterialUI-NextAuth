@@ -36,7 +36,7 @@ export const menutItems: menutItemsProps[] = [
     items: [
       {
         ident: 'dashboard:general',
-        link: '/dashboard/general',
+        link: '/app/dashboard/general',
         name: 'Dashboard Geral',
         // Icon: BarChartIcon,
         access: 'default',
@@ -46,7 +46,7 @@ export const menutItems: menutItemsProps[] = [
   },
   {
     ident: 'tables',
-    link: '/tables',
+    link: '/app/tables',
     name: 'Tabelas',
     Icon: TableChartIcon,
     access: 'default',
@@ -54,7 +54,7 @@ export const menutItems: menutItemsProps[] = [
   },
   {
     ident: 'objects',
-    link: '/objects',
+    link: '/app/objects',
     name: 'Objetos',
     Icon: WatchIcon,
     access: 'default',
@@ -62,7 +62,7 @@ export const menutItems: menutItemsProps[] = [
   },
   {
     ident: 'process',
-    // link: '/process',
+    // link: '/app/process',
     name: 'Processos',
     Icon: GraphicEqIcon,
     access: 'default',
@@ -70,7 +70,7 @@ export const menutItems: menutItemsProps[] = [
     items: [
       {
         ident: 'process:cloning',
-        // link: '/process',
+        // link: '/app/process',
         name: 'Clonagens',
         // Icon: GraphicEqIcon,
         access: 'default',
@@ -78,7 +78,7 @@ export const menutItems: menutItemsProps[] = [
         items: [
           {
             ident: 'process:clpostgres',
-            link: '/process/clone-postgres',
+            link: '/app/process/clone-postgres',
             name: 'Clones PostgreSQL',
             // Icon: GraphicEqIcon,
             access: 'default',
@@ -86,7 +86,7 @@ export const menutItems: menutItemsProps[] = [
           },
           {
             ident: 'process:cloracle',
-            link: '/process/clone-oracle',
+            link: '/app/process/clone-oracle',
             name: 'Clones Oracle',
             // Icon: GraphicEqIcon,
             access: 'default',
@@ -96,7 +96,7 @@ export const menutItems: menutItemsProps[] = [
       },
       {
         ident: 'process:dumpora',
-        link: '/process/dumps-ora',
+        link: '/app/process/dumps-ora',
         name: 'Dumps Oracle',
         // Icon: GraphicEqIcon,
         access: 'default',
@@ -106,7 +106,7 @@ export const menutItems: menutItemsProps[] = [
   },
   {
     ident: 'teams',
-    // link: '/teams',
+    // link: '/app/teams',
     name: 'Equipes',
     Icon: GroupIcon,
     access: 'default',
@@ -114,7 +114,7 @@ export const menutItems: menutItemsProps[] = [
     items: [
       {
         ident: 'teams:abscal',
-        link: '/teams/absent-calendar',
+        link: '/app/teams/absent-calendar',
         name: 'Calendário de Ausências',
         // Icon: GroupIcon,
         access: 'default',
@@ -122,7 +122,7 @@ export const menutItems: menutItemsProps[] = [
       },
       {
         ident: 'teams:absres',
-        link: '/teams/absent-resume',
+        link: '/app/teams/absent-resume',
         name: 'Resumo de Ausências',
         // Icon: GroupIcon,
         access: 'default',
@@ -130,7 +130,7 @@ export const menutItems: menutItemsProps[] = [
       },
       {
         ident: 'teams:absadm',
-        link: '/teams/absent-admin',
+        link: '/app/teams/absent-admin',
         name: 'Admin. de Ausências',
         // Icon: GroupIcon,
         access: 'default',
@@ -148,7 +148,7 @@ export const menutItems: menutItemsProps[] = [
     items: [
       {
         ident: 'config',
-        link: '/app/config',
+        link: '/admin/config',
         name: 'Configurações',
         // Icon: AssignmentIndIcon,
         access: 'admin',
@@ -156,7 +156,7 @@ export const menutItems: menutItemsProps[] = [
       },
       {
         ident: 'profile',
-        link: '/app/profile',
+        link: '/user/profile',
         name: 'Perfil de Usuário',
         // Icon: AssignmentIndIcon,
         access: 'default',
