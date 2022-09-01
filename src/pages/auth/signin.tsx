@@ -8,8 +8,8 @@ import { InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
 import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
 import { ThemeProvider, useTheme as useThemeNT } from 'next-themes';
-import { useEffect } from 'react';
 
+// import { useEffect } from 'react';
 import SEO from '../../components/foundation/SEO';
 import { WrapperProvider } from '../../components/wrappers/WebsitePage/context';
 import WebsiteGlobalProvider from '../../components/wrappers/WebsitePage/provider';
@@ -30,7 +30,7 @@ export async function getServerSideProps(context: any) {
 }
 
 const PageSignIn = ({
-  // csrfToken,
+  csrfToken,
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { resolvedTheme } = useThemeNT(); // useTheme from next-themes
@@ -79,41 +79,51 @@ const PageSignIn = ({
                     style={{ marginBottom: '20px' }}
                   />
                   <div className={styles.cardContent}>
-                    {/* <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <input
-              placeholder="Email (Not Setup - Please Use Github)"
-              size="large"
-              disabled
-            />
-            <button type="button" className={styles.primaryBtn}>
-              Submit
-            </button> */}
+                    <form method="post" action="/api/auth/signin/email">
+                      <input
+                        name="csrfToken"
+                        type="hidden"
+                        defaultValue={csrfToken}
+                      />
+                      <input placeholder="Email" />
+                      <button type="submit" className={styles.primaryBtn}>
+                        Acessar com e-mail
+                      </button>
+                    </form>
                     <Typography variant="h5" color="primary">
                       Escolha uma das opções abaixo para login
                     </Typography>
                     {/* eslint-disable-next-line prettier/prettier */}
-                    {providers && Object.values(providers).map((provider) => (
-                        // eslint-disable-next-line react/jsx-indent
-                        <div key={provider.name} style={{ marginBottom: 0 }}>
-                          <Button
-                            type="button"
-                            variant="outlined"
-                            // color="primary"
-                            sx={{
-                              width: { xs: '100%', md: '90%', lg: '75%' },
-                              marginBottom: '0.4em',
-                              textDecoration: 'none',
-                              '&:hover': {
-                                background: theme.palette.primary.main,
-                              },
-                            }}
-                            onClick={() => signIn(provider.id)}
-                          >
-                            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                            Acessar com {provider.name}
-                          </Button>
-                        </div>
-                      ))}
+                    {providers && Object.values(providers).map((provider) => {
+                        if (provider.type !== 'email') {
+                          return (
+                            // eslint-disable-next-line react/jsx-indent
+                            <div
+                              key={provider.name}
+                              style={{ marginBottom: 0 }}
+                            >
+                              <Button
+                                type="button"
+                                variant="outlined"
+                                // color="primary"
+                                sx={{
+                                  width: { xs: '100%', md: '90%', lg: '75%' },
+                                  marginBottom: '0.4em',
+                                  textDecoration: 'none',
+                                  '&:hover': {
+                                    background: theme.palette.primary.main,
+                                  },
+                                }}
+                                onClick={() => signIn(provider.id)}
+                              >
+                                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                                Acessar com {provider.name}
+                              </Button>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
                     {/* <Button variant="outlined">Acessar com outro</Button> */}
                   </div>
                 </Paper>
